@@ -26,7 +26,6 @@ router.get("/install", function (req, res, next) {
     connection.query(sql, function (err, results) {
       if (err) throw err;
       connection.release();
-      //res.json({ success: true });
       res.redirect("/");
     });
   });
