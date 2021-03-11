@@ -2,7 +2,7 @@
 
 Node JS CRUD API example
 
-- [x] store info in JSON file
+- [x] store info in [JSON file](data/teams.json)
 - [x] store info in DB (MYSQL)
 
 ## Install
@@ -21,7 +21,7 @@ npm run devstart
 
 ### JSON file as storage
 
-Team members are stored inside [data/team.json](data/team.json)
+Team members are stored inside [data/teams.json](data/teams.json)
 
 ```js
 // GET teams-json
@@ -38,7 +38,11 @@ fetch("http://localhost:3000/teams-json/create", {
   headers: {
     "Content-Type": "application/json"
   },
-  body: JSON.stringify({ firstName: "Your", lastName: "Name", gitHub: "youaredev" })
+  body: JSON.stringify({
+    members: "Your Name",
+    name: "CV",
+    url: "https://github.com/nmatei/teams-networking"
+  })
 });
 
 // DELETE teams-json/delete
@@ -58,9 +62,9 @@ fetch("http://localhost:3000/teams-json/update", {
   },
   body: JSON.stringify({
     id: "fedcba1610310163146",
-    firstName: "UpdatedName",
-    lastName: "Name",
-    gitHub: "youaredev"
+    members: "UpdatedName",
+    name: "Name",
+    url: "https://github.com/nmatei/teams-networking"
   })
 });
 ```

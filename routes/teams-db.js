@@ -15,13 +15,13 @@ const pool = mysql.createPool({
 });
 
 /**
- * run this before first USAGE to create members TABLE
+ * run this before first USAGE to create teams TABLE
  */
 router.get("/install", function (req, res, next) {
   pool.getConnection(function (err, connection) {
     if (err) throw err;
     const sql = `
-    CREATE TABLE IF NOT EXISTS members (id INT NOT NULL AUTO_INCREMENT, firstName TEXT NOT NULL, lastName TEXT NOT NULL, gitHub TEXT NOT NULL, PRIMARY KEY (id)) ENGINE = InnoDB;
+    CREATE TABLE IF NOT EXISTS teams (id INT NOT NULL AUTO_INCREMENT, members TEXT NOT NULL, name TEXT NOT NULL, url TEXT NOT NULL, PRIMARY KEY (id)) ENGINE = InnoDB;
     `;
     connection.query(sql, function (err, results) {
       if (err) throw err;
@@ -37,7 +37,7 @@ router.get("/install", function (req, res, next) {
 router.get("/", function (req, res, next) {
   pool.getConnection(function (err, connection) {
     if (err) throw err;
-    const sql = `SELECT id, firstName, lastName, gitHub FROM members`;
+    const sql = `SELECT id, members, name, url FROM teams`;
     connection.query(sql, function (err, results) {
       if (err) throw err;
       connection.release();
@@ -50,14 +50,14 @@ router.get("/", function (req, res, next) {
  *
  */
 router.post("/create", function (req, res, next) {
-  const firstName = req.body.firstName;
-  const lastName = req.body.lastName;
-  const gitHub = req.body.gitHub;
+  const members = req.body.members;
+  const name = req.body.name;
+  const url = req.body.url;
 
   pool.getConnection(function (err, connection) {
     if (err) throw err;
-    const sql = `INSERT INTO members (id, firstName, lastName, gitHub) VALUES (NULL, ?, ?, ?);`;
-    connection.query(sql, [firstName, lastName, gitHub], function (err, results) {
+    const sql = `INSERT INTO teams (id, members, name, url) VALUES (NULL, ?, ?, ?);`;
+    connection.query(sql, [members, name, url], function (err, results) {
       if (err) throw err;
       const id = results.insertId;
       connection.release();
@@ -77,7 +77,7 @@ router.delete("/delete", function (req, res, next) {
 
   pool.getConnection(function (err, connection) {
     if (err) throw err;
-    const sql = `DELETE FROM members WHERE id=?`;
+    const sql = `DELETE FROM teams WHERE id=?`;
     connection.query(sql, [id], function (err, results) {
       if (err) throw err;
       connection.release();
@@ -91,14 +91,14 @@ router.delete("/delete", function (req, res, next) {
  */
 router.put("/update", function (req, res, next) {
   const id = req.body.id;
-  const firstName = req.body.firstName;
-  const lastName = req.body.lastName;
-  const gitHub = req.body.gitHub;
+  const members = req.body.members;
+  const name = req.body.name;
+  const url = req.body.url;
 
   pool.getConnection(function (err, connection) {
     if (err) throw err;
-    const sql = `UPDATE members SET firstName=?, lastName=?, gitHub=? WHERE id=?`;
-    connection.query(sql, [firstName, lastName, gitHub, id], function (err, results) {
+    const sql = `UPDATE teams SET members=?, name=?, url=? WHERE id=?`;
+    connection.query(sql, [members, name, url, id], function (err, results) {
       if (err) throw err;
       connection.release();
       res.json({ success: true });

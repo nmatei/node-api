@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 var fs = require("fs");
 
-const DATA_PATH = "data/team.json";
+const DATA_PATH = "data/teams.json";
 
 /**
  * IMPORTANT: add content type headers to be able to use req.body.*
@@ -14,31 +14,31 @@ const DATA_PATH = "data/team.json";
  */
 router.get("/", function (req, res, next) {
   const content = fs.readFileSync(DATA_PATH);
-  const persons = JSON.parse(content);
-  res.json(persons);
+  const teams = JSON.parse(content);
+  res.json(teams);
 });
 
 /**
  *
  */
 router.post("/create", function (req, res, next) {
-  const firstName = req.body.firstName;
-  const lastName = req.body.lastName;
-  const gitHub = req.body.gitHub;
+  const members = req.body.members;
+  const name = req.body.name;
+  const url = req.body.url;
 
   let content = fs.readFileSync(DATA_PATH);
-  const persons = JSON.parse(content);
+  const teams = JSON.parse(content);
 
   const id = Math.random().toString(36).substring(7) + new Date().getTime();
 
-  persons.push({
+  teams.push({
     id,
-    firstName,
-    lastName,
-    gitHub
+    members,
+    name,
+    url
   });
 
-  content = JSON.stringify(persons, null, 2);
+  content = JSON.stringify(teams, null, 2);
   fs.writeFileSync(DATA_PATH, content);
 
   res.json({ success: true, id });
@@ -51,13 +51,13 @@ router.delete("/delete", function (req, res, next) {
   const id = req.body.id;
 
   let content = fs.readFileSync(DATA_PATH);
-  const persons = JSON.parse(content);
+  const teams = JSON.parse(content);
 
-  const remainingPersons = persons.filter(function (person) {
-    return person.id != id;
+  const remainingTeams = teams.filter(function (team) {
+    return team.id != id;
   });
 
-  content = JSON.stringify(remainingPersons, null, 2);
+  content = JSON.stringify(remainingTeams, null, 2);
   fs.writeFileSync(DATA_PATH, content);
 
   res.json({ success: true });
@@ -68,23 +68,23 @@ router.delete("/delete", function (req, res, next) {
  */
 router.put("/update", function (req, res, next) {
   const id = req.body.id;
-  const firstName = req.body.firstName;
-  const lastName = req.body.lastName;
-  const gitHub = req.body.gitHub;
+  const members = req.body.members;
+  const name = req.body.name;
+  const url = req.body.url;
 
   let content = fs.readFileSync(DATA_PATH);
-  const persons = JSON.parse(content);
+  const teams = JSON.parse(content);
 
-  const contact = persons.find(function (person) {
-    return person.id == id;
+  const contact = teams.find(function (team) {
+    return team.id == id;
   });
   if (contact) {
-    contact.firstName = firstName;
-    contact.lastName = lastName;
-    contact.gitHub = gitHub;
+    contact.members = members;
+    contact.name = name;
+    contact.url = url;
   }
 
-  content = JSON.stringify(persons, null, 2);
+  content = JSON.stringify(teams, null, 2);
   fs.writeFileSync(DATA_PATH, content);
 
   res.json({ success: true });
