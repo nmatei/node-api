@@ -76,4 +76,4 @@ Team members are stored mysql
 - configure user & pass for mysql connection [routes/teams-db.js](routes/teams-db.js)
 - create a database named **teams**
 - run [http://localhost:3000/teams/install](http://localhost:3000/teams/install)
-- now you can any other CRUD operations (the same as for json but change url "teams-json" -> "teams")
+- now you can any other CRUD operations (the same as for json but change url **"teams-json" -> "teams"**)
