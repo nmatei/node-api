@@ -22,6 +22,7 @@ router.get("/", function (req, res, next) {
  *
  */
 router.post("/create", function (req, res, next) {
+  const promotion = req.body.promotion;
   const members = req.body.members;
   const name = req.body.name;
   const url = req.body.url;
@@ -33,6 +34,7 @@ router.post("/create", function (req, res, next) {
 
   teams.push({
     id,
+    promotion,
     members,
     name,
     url
@@ -68,6 +70,7 @@ router.delete("/delete", function (req, res, next) {
  */
 router.put("/update", function (req, res, next) {
   const id = req.body.id;
+  const promotion = req.body.promotion;
   const members = req.body.members;
   const name = req.body.name;
   const url = req.body.url;
@@ -79,6 +82,7 @@ router.put("/update", function (req, res, next) {
     return team.id == id;
   });
   if (contact) {
+    contact.promotion = promotion;
     contact.members = members;
     contact.name = name;
     contact.url = url;

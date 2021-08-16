@@ -39,6 +39,7 @@ fetch("http://localhost:3000/teams-json/create", {
     "Content-Type": "application/json"
   },
   body: JSON.stringify({
+    promotion: "WON3",
     members: "Your Name",
     name: "CV",
     url: "https://github.com/nmatei/teams-networking"
@@ -62,6 +63,7 @@ fetch("http://localhost:3000/teams-json/update", {
   },
   body: JSON.stringify({
     id: "fedcba1610310163146",
+    promotion: "WON3",
     members: "UpdatedName",
     name: "Name",
     url: "https://github.com/nmatei/teams-networking"
