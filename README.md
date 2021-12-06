@@ -19,6 +19,8 @@ npm install
 npm run devstart
 ```
 
+Open http://localhost:3000 to see if it works
+
 ### JSON file as storage
 
 Team members are stored inside [data/teams.json](data/teams.json)

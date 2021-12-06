@@ -13,6 +13,7 @@ const DATA_PATH = "data/teams.json";
  *
  */
 router.get("/", function (req, res, next) {
+  console.log('reading file %o', DATA_PATH);
   const content = fs.readFileSync(DATA_PATH);
   const teams = JSON.parse(content);
   res.json(teams);
