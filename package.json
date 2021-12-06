@@ -6,6 +6,11 @@
     "start": "node ./bin/www",
     "devstart": "nodemon ./bin/www"
   },
+  "nodemonConfig": {
+    "ignore": [
+      "data/*"
+    ]
+  },
   "dependencies": {
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
