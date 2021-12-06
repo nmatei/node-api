@@ -26,7 +26,17 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/teams", teamsDBRouter);
-app.use("/teams-json", teamsRouter);
+
+function processingSimulate(req, res, next) {
+  console.log('processing >> enter');
+  setTimeout(() => {
+    console.log('processing << exit');
+    // TODO check if any requests are in progress
+    //   and wait until is finished
+    next();
+  }, 400);
+}
+app.use("/teams-json", processingSimulate, teamsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
