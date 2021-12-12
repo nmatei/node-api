@@ -28,13 +28,11 @@ app.use("/users", usersRouter);
 app.use("/teams", teamsDBRouter);
 
 function processingSimulate(req, res, next) {
-  console.log('processing >> enter');
+  const wait = 500 + Math.floor(Math.random() * 6) * 100; // min-500ms + max-500ms
   setTimeout(() => {
     console.log('processing << exit');
-    // TODO check if any requests are in progress
-    //   and wait until is finished
     next();
-  }, 400);
+  }, wait);
 }
 app.use("/teams-json", processingSimulate, teamsRouter);
 
