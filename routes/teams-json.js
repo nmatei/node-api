@@ -45,6 +45,7 @@ router.post("/create", function (req, res, next) {
   fs.writeFileSync(DATA_PATH, content);
 
   res.json({ success: true, id });
+  res.status(201);
 });
 
 /**
