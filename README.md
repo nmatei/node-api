@@ -4,6 +4,7 @@ Node JS CRUD API example
 
 - [x] store info in [JSON file](data/teams.json)
 - [x] store info in DB (MYSQL)
+- [ ] store info in file similar to mongo format (check https://github.com/sergeyksv/tingodb)
 
 ## Install
 
