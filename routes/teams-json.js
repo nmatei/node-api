@@ -5,17 +5,11 @@ var fs = require("fs");
 const DATA_PATH = "data/teams.json";
 
 /**
- * IMPORTANT: add content type headers to be able to use req.body.*
-  headers: {"Content-Type": "application/json"},
- */
-
-/**
  *
  */
 router.get("/", function (req, res, next) {
-  console.log('reading file %o', DATA_PATH);
-  const content = fs.readFileSync(DATA_PATH);
-  const teams = JSON.parse(content);
+  console.log("reading file %o", DATA_PATH);
+  const teams = getTeams();
   res.json(teams);
 });
 
@@ -28,9 +22,7 @@ router.post("/create", function (req, res, next) {
   const name = req.body.name;
   const url = req.body.url;
 
-  let content = fs.readFileSync(DATA_PATH);
-  const teams = JSON.parse(content);
-
+  const teams = getTeams();
   const id = Math.random().toString(36).substring(7) + new Date().getTime();
 
   teams.push({
@@ -41,8 +33,7 @@ router.post("/create", function (req, res, next) {
     url
   });
 
-  content = JSON.stringify(teams, null, 2);
-  fs.writeFileSync(DATA_PATH, content);
+  setTeams(teams);
 
   res.json({ success: true, id });
   res.status(201);
@@ -54,15 +45,9 @@ router.post("/create", function (req, res, next) {
 router.delete("/delete", function (req, res, next) {
   const id = req.body.id;
 
-  let content = fs.readFileSync(DATA_PATH);
-  const teams = JSON.parse(content);
+  const teams = getTeams().filter(team => team.id != id);
 
-  const remainingTeams = teams.filter(function (team) {
-    return team.id != id;
-  });
-
-  content = JSON.stringify(remainingTeams, null, 2);
-  fs.writeFileSync(DATA_PATH, content);
+  setTeams(teams);
 
   res.json({ success: true });
 });
@@ -77,23 +62,29 @@ router.put("/update", function (req, res, next) {
   const name = req.body.name;
   const url = req.body.url;
 
-  let content = fs.readFileSync(DATA_PATH);
-  const teams = JSON.parse(content);
+  const teams = getTeams();
 
-  const contact = teams.find(function (team) {
-    return team.id == id;
-  });
-  if (contact) {
-    contact.promotion = promotion;
-    contact.members = members;
-    contact.name = name;
-    contact.url = url;
+  const team = teams.find(team => team.id == id);
+  if (team) {
+    team.promotion = promotion;
+    team.members = members;
+    team.name = name;
+    team.url = url;
   }
 
-  content = JSON.stringify(teams, null, 2);
-  fs.writeFileSync(DATA_PATH, content);
+  setTeams(teams);
 
   res.json({ success: true });
 });
+
+function getTeams() {
+  const content = fs.readFileSync(DATA_PATH);
+  return JSON.parse(content);
+}
+
+function setTeams(teams) {
+  const content = JSON.stringify(teams, null, 2);
+  fs.writeFileSync(DATA_PATH, content);
+}
 
 module.exports = router;
