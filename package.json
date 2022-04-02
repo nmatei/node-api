@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "clear": "rimraf node_modules",
     "start": "node ./bin/www",
     "devstart": "nodemon ./bin/www",
     "data": "git checkout HEAD^ data/teams.json"
