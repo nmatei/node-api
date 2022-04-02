@@ -17,6 +17,8 @@ npm install
 ## JS Usage
 
 ```sh
+npm start
+# or (when you work inside code and want auto restart)
 npm run devstart
 ```
 
