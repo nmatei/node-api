@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "clear": "rimraf node_modules",
+    "doctoc": "doctoc README.md",
     "start": "node ./bin/www",
     "devstart": "nodemon ./bin/www",
     "data": "git checkout HEAD^ data/teams.json"

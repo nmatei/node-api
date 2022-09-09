@@ -6,6 +6,19 @@ Node JS CRUD API example
 - [x] store info in DB (MYSQL)
 - [ ] store info in file similar to mongo format (check https://github.com/sergeyksv/tingodb)
 
+## Table of Contents
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+
+- [Install](#install)
+- [Usage](#usage)
+- [JSON file as storage](#json-file-as-storage)
+- [DB (MySQL) as storage](#db-mysql-as-storage)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## Install
 
 ```sh
@@ -14,7 +27,7 @@ cd node-api
 npm install
 ```
 
-## JS Usage
+## Usage
 
 ```sh
 npm start
@@ -24,7 +37,7 @@ npm run devstart
 
 Open http://localhost:3000 to see if it works
 
-### JSON file as storage
+## JSON file as storage
 
 Team members are stored inside [data/teams.json](data/teams.json)
 
@@ -76,11 +89,12 @@ fetch("http://localhost:3000/teams-json/update", {
 });
 ```
 
-### DB (MySQL) as storage
+## DB (MySQL) as storage
 
 Team members are stored mysql
 
 - configure user & pass for mysql connection [routes/teams-db.js](routes/teams-db.js)
 - create a database named **teams**
 - run [http://localhost:3000/teams/install](http://localhost:3000/teams/install)
-- now you can any other CRUD operations (the same as for json but change url **"teams-json" -> "teams"**)
+- now you can run all CRUD operations
+  - the same as for json but change url **"teams-json" -> "teams"**
