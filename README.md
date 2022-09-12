@@ -1,16 +1,16 @@
 # node-api
 
-Node JS CRUD API example
+Node JS CRUD API Example
 
 - [x] store info in [JSON file](data/teams.json)
-- [x] store info in DB (MYSQL)
+- [x] store info in DB [MySQL](https://www.mysql.com/)
 - [ ] store info in file similar to mongo format (check https://github.com/sergeyksv/tingodb)
+- [x] UI Example for this app can be found in [nmatei/teams-networking](https://github.com/nmatei/teams-networking)
 
 ## Table of Contents
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
 
 - [Install](#install)
 - [Usage](#usage)
@@ -91,7 +91,7 @@ fetch("http://localhost:3000/teams-json/update", {
 
 ## DB (MySQL) as storage
 
-Team members are stored mysql
+Team members are stored in [MySQL](https://www.mysql.com/)
 
 - configure user & pass for mysql connection [routes/teams-db.js](routes/teams-db.js)
 - create a database named **teams**
