@@ -124,11 +124,12 @@ router.put("/update", async function (req, res, next) {
   const members = req.body.members;
   const name = req.body.name;
   const url = req.body.url;
+  const promotion = req.body.promotion;
 
   try {
     const connection = await getConnection(res);
-    const sql = `UPDATE teams SET members=?, name=?, url=? WHERE id=?`;
-    connection.query(sql, [members, name, url, id], function (err, results) {
+    const sql = `UPDATE teams SET promotion=?, members=?, name=?, url=? WHERE id=?`;
+    connection.query(sql, [promotion, members, name, url, id], function (err, results) {
       if (err) throw err;
       connection.release();
       res.json({ success: true });
