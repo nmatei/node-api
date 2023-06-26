@@ -28,7 +28,7 @@ app.use("/users", usersRouter);
 app.use("/teams", teamsDBRouter);
 
 function processingSimulate(req, res, next) {
-  const wait = 500 + Math.floor(Math.random() * 6) * 100; // min-500ms + max-500ms
+  const wait = 500 + Math.floor(Math.random() * 11) * 100;
   setTimeout(() => {
     console.log("processing << exit");
     next();
