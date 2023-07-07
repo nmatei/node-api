@@ -19,7 +19,7 @@ Node JS CRUD API Example
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## Install
+## ⚙ Install
 
 ```sh
 git clone https://github.com/nmatei/node-api.git
@@ -98,3 +98,12 @@ Team members are stored in [MySQL](https://www.mysql.com/)
 - run [http://localhost:3000/teams/install](http://localhost:3000/teams/install)
 - now you can run all CRUD operations
   - the same as for json but change url **"teams-json" -> "teams"**
+
+## TODOs
+
+in case port us used...
+
+- give hints...
+- and change port if not possible.
+
+add port config
